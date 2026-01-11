@@ -5,17 +5,17 @@ import { EmailResult, ToneType, ToneParameters } from "./types";
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
 const SYSTEM_INSTRUCTION = `
-당신은 한국 비즈니스 커뮤니케이션의 달인이자, 창의적인 글쓰기 전문가입니다. 
+당신은 한국 비즈니스 커뮤니케이션의 달인이자, 창의적인 글쓰기 전문가입니다.
 사용자의 투박한 요청 사항을 비즈니스 메일 형식으로 정제합니다.
 
 **[필수 규칙] 맺음말 처리**
-- 모든 메일의 마지막 맺음말(발신자 성함 뒤)에는 반드시 '드림' 대신 **'올림'**을 사용하십시오. 
+- 모든 메일의 마지막 맺음말(발신자 성함 뒤)에는 반드시 '드림' 대신 **'올림'**을 사용하십시오.
 - 예: "홍길동 드림" (X) -> "홍길동 올림" (O)
 - 이는 서비스의 정체성(올림)과 직결된 사항이므로 절대 잊지 마십시오.
 
 **[매우 중요] FUN 모드 (isFunMode: true) 절대 규칙**
-FUN 모드에서는 일반적인 비즈니스 말투를 완전히 버리고, 사용자가 선택한 '드립 컨셉(ID)'의 페르소나에 100% 빙의해야 합니다. 
-어설프게 예의를 차리느라 컨셉이 흐려지는 것을 가장 경계하십시오. 
+FUN 모드에서는 일반적인 비즈니스 말투를 완전히 버리고, 사용자가 선택한 '드립 컨셉(ID)'의 페르소나에 100% 빙의해야 합니다.
+어설프게 예의를 차리느라 컨셉이 흐려지는 것을 가장 경계하십시오.
 
 1. **LEGENDARY_MANAGER (전설의 부장님)**:
    - 말투: 90년대 PC통신 감성, 아재 개그, 썰렁한 언어유희.
@@ -64,8 +64,8 @@ FUN 모드에서는 일반적인 비즈니스 말투를 완전히 버리고, 사
 `;
 
 export const polishEmail = async (
-  input: string, 
-  tone: ToneType, 
+  input: string,
+  tone: ToneType,
   params: ToneParameters,
   refinementInstruction?: string,
   previousResult?: EmailResult,
@@ -80,22 +80,22 @@ export const polishEmail = async (
     `;
 
     let userPrompt = `[입력 내용]\n${input}\n\n[지시 사항]\n위 내용을 ${isFunMode ? tone + ' 컨셉의 FUN 모드' : '전문적인 비즈니스'} 메일로 정제하십시오. 맺음말은 반드시 '올림'을 사용하세요.`;
-    
+
     if (refinementInstruction && previousResult) {
       userPrompt = `
         [이전 메일]
         제목: ${previousResult.subject}
         본문: ${previousResult.body}
-        
+
         [수정 요청]
         "${refinementInstruction}"
-        
+
         이 요청을 반영하여 ${isFunMode ? tone + ' 컨셉' : '전문적'}으로 다시 작성하십시오. 맺음말은 반드시 '올림'을 사용하세요.
       `;
     }
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.5-flash-lite",
       contents: userPrompt,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
