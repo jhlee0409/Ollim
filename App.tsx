@@ -88,24 +88,24 @@ const App: React.FC = () => {
     <div className={`min-h-screen flex flex-col transition-colors duration-500 bg-[#F9F7F2]`}>
       <Header isFunMode={state.isFunMode} onToggleFunMode={toggleFunMode} />
       
-      <main className="flex-grow p-4 md:p-10">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <main className="flex-grow p-3 md:p-5">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4">
           {/* Input Area */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className={`bg-white rounded-2xl paper-shadow border ${state.isFunMode ? 'border-ollim-green/20' : 'border-ollim-sand/20'} p-8 space-y-8 h-full flex flex-col transition-all`}>
+          <div className="lg:col-span-5 space-y-4">
+            <div className={`bg-white rounded-2xl paper-shadow border ${state.isFunMode ? 'border-ollim-green/20' : 'border-ollim-sand/20'} p-5 space-y-4 h-full flex flex-col transition-all`}>
               <TemplateSelector onSelect={handleTemplateSelect} isFunMode={state.isFunMode} />
               
-              <div className="space-y-3 flex-grow flex flex-col">
+              <div className="space-y-2 flex-grow flex flex-col">
                 <div className="flex justify-between items-end px-1">
-                  <label htmlFor="draft" className="text-xs font-bold text-warm-gray uppercase tracking-widest">메일 초안 또는 요청 사항</label>
-                  <span className={`text-[10px] ${state.isFunMode ? 'text-ollim-green' : 'text-ollim-sand'} font-bold`}>DRAFT</span>
+                  <label htmlFor="draft" className="text-[11px] font-bold text-warm-gray uppercase tracking-widest">메일 초안 또는 요청 사항</label>
+                  <span className={`text-[9px] ${state.isFunMode ? 'text-ollim-green' : 'text-ollim-sand'} font-bold`}>DRAFT</span>
                 </div>
                 <textarea
                   id="draft"
                   value={state.input}
                   onChange={(e) => setState(prev => ({ ...prev, input: e.target.value }))}
                   placeholder={state.isFunMode ? "팀장님께 보내는 드립 섞인 조퇴 사유를 적어보세요..." : "예: 프로젝트 마감일 미뤄달라고 할거야. 거절할 건데 기분 안 나쁘게 써줘. 등"}
-                  className={`w-full min-h-[200px] flex-grow p-5 rounded-xl border-2 focus:ring-4 ${
+                  className={`w-full min-h-[120px] flex-grow p-3 text-sm rounded-xl border-2 focus:ring-4 ${
                     state.isFunMode 
                       ? 'focus:ring-ollim-green/10 focus:border-ollim-green border-ollim-green/10' 
                       : 'focus:ring-ollim-sand/10 focus:border-ollim-sand border-ollim-sand/10'
@@ -113,7 +113,7 @@ const App: React.FC = () => {
                 ></textarea>
               </div>
 
-              <div className={state.isFunMode ? "w-full" : "space-y-8"}>
+              <div className={state.isFunMode ? "w-full" : "space-y-4"}>
                 <ToneChips 
                   selected={state.selectedTone} 
                   onSelect={(tone) => setState(prev => ({ ...prev, selectedTone: tone }))} 
@@ -128,11 +128,11 @@ const App: React.FC = () => {
                 )}
               </div>
 
-              <div className="pt-4 flex space-x-4">
+              <div className="pt-1 flex space-x-2">
                 <button
                   onClick={() => handleProcess()}
                   disabled={!state.input.trim() || state.isLoading}
-                  className={`flex-grow py-5 rounded-xl font-bold flex items-center justify-center space-x-3 shadow-lg transition-all ${
+                  className={`flex-grow py-2.5 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 shadow-lg transition-all ${
                     !state.input.trim() || state.isLoading
                       ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
                       : `bg-${activeThemeColor} text-white hover:translate-y-[-2px] active:translate-y-0 shadow-${activeThemeColor}/30`
@@ -153,7 +153,7 @@ const App: React.FC = () => {
                 {(state.result || state.input) && (
                   <button 
                     onClick={handleReset}
-                    className={`p-5 rounded-xl border border-slate-200 text-warm-gray hover:bg-slate-50 transition-colors`}
+                    className={`p-2.5 rounded-xl border border-slate-200 text-warm-gray hover:bg-slate-50 transition-colors`}
                     title="초기화"
                   >
                     <i className="fas fa-rotate-left"></i>
@@ -180,14 +180,14 @@ const App: React.FC = () => {
                 isFunMode={state.isFunMode}
               />
             ) : (
-              <div className={`h-full min-h-[600px] border-2 border-dashed rounded-3xl flex flex-col items-center justify-center p-16 text-center transition-all ${state.isFunMode ? 'border-ollim-green/20 bg-ollim-green/5 text-ollim-green/40' : 'border-ollim-sand/30 bg-white/50 text-ollim-sand/40'}`}>
-                <div className={`w-28 h-28 rounded-3xl flex items-center justify-center mb-10 rotate-3 transition-transform hover:rotate-0 ${state.isFunMode ? 'bg-ollim-green/10' : 'bg-ollim-sand/10'}`}>
-                  <i className={`fas ${state.isFunMode ? 'fa-masks-theater' : 'fa-feather-pointed'} text-5xl ${state.isFunMode ? 'text-ollim-green' : 'text-ollim-sand'}`}></i>
+              <div className={`h-full min-h-[450px] border-2 border-dashed rounded-3xl flex flex-col items-center justify-center p-10 text-center transition-all ${state.isFunMode ? 'border-ollim-green/20 bg-ollim-green/5 text-ollim-green/40' : 'border-ollim-sand/30 bg-white/50 text-ollim-sand/40'}`}>
+                <div className={`w-20 h-20 rounded-3xl flex items-center justify-center mb-6 rotate-3 transition-transform hover:rotate-0 ${state.isFunMode ? 'bg-ollim-green/10' : 'bg-ollim-sand/10'}`}>
+                  <i className={`fas ${state.isFunMode ? 'fa-masks-theater' : 'fa-feather-pointed'} text-4xl ${state.isFunMode ? 'text-ollim-green' : 'text-ollim-sand'}`}></i>
                 </div>
-                <h3 className={`text-2xl font-bold mb-4 font-serif-ollim ${state.isFunMode ? 'text-ollim-green' : 'text-ollim-sand'}`}>
+                <h3 className={`text-xl font-bold mb-3 font-serif-ollim ${state.isFunMode ? 'text-ollim-green' : 'text-ollim-sand'}`}>
                   {state.isFunMode ? '드립 한 스푼, 품격 한 스푼' : '정성스럽게 올리는 비즈니스 메일'}
                 </h3>
-                <p className="max-w-md text-sm leading-relaxed text-warm-gray font-medium">
+                <p className="max-w-sm text-xs leading-relaxed text-warm-gray font-medium">
                   {state.isFunMode 
                     ? '딱딱한 메일은 이제 그만! 상대방을 미소 짓게 만드는 마법 같은 문장을 제안해 드릴게요.'
                     : '왼쪽에서 상황을 선택하거나 초안을 작성해 보세요. 당신의 진심에 전문성을 더해 드립니다.'
@@ -222,7 +222,7 @@ const App: React.FC = () => {
           <span className="flex items-center"><i className="fas fa-bolt text-ollim-green mr-2"></i> 위트</span>
           <span className="flex items-center"><i className="fas fa-check-double text-slate-400 mr-2"></i> 전문성</span>
         </p>
-        <p className="font-bold tracking-widest text-[10px] uppercase">&copy; 2024 올림 (Ollim). All rights reserved.</p>
+        <p className="font-bold tracking-widest text-[10px] uppercase">&copy; 2026 올림 (Ollim). All rights reserved.</p>
       </footer>
 
       <style>{`

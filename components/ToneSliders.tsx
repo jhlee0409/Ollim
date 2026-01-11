@@ -52,17 +52,17 @@ const ToneSliders: React.FC<ToneSlidersProps> = ({ params, onChange, isFunMode }
   ];
 
   return (
-    <div className={`space-y-6 p-6 rounded-2xl border border-slate-100 bg-slate-50/50`}>
-      <h3 className="text-[10px] font-bold text-warm-gray uppercase tracking-widest flex items-center">
-        <i className="fas fa-sliders-h mr-3"></i>
+    <div className={`space-y-3 p-4 rounded-2xl border border-slate-100 bg-slate-50/50`}>
+      <h3 className="text-[9px] font-bold text-warm-gray uppercase tracking-widest flex items-center">
+        <i className="fas fa-sliders-h mr-2"></i>
         Fine Tuning
       </h3>
-      <div className="space-y-6">
+      <div className="space-y-3">
         {sliderConfigs.map((config) => (
-          <div key={config.key} className="space-y-3">
-            <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-tight">
+          <div key={config.key} className="space-y-2">
+            <div className="flex justify-between items-center text-[9px] font-bold uppercase tracking-tight">
               <div className="flex items-center text-charcoal">
-                <i className={`fas ${config.icon} mr-2 text-${activeColor}`}></i>
+                <i className={`fas ${config.icon} mr-1.5 text-${activeColor}`}></i>
                 <span>{config.label}</span>
               </div>
               <span className={`text-${activeColor}`}>
@@ -70,14 +70,15 @@ const ToneSliders: React.FC<ToneSlidersProps> = ({ params, onChange, isFunMode }
               </span>
             </div>
             
-            <div className="grid grid-cols-4 gap-1 p-1.5 rounded-xl border border-slate-100 bg-white shadow-inner">
+            <div className="grid grid-cols-4 gap-1 p-1 rounded-xl border border-slate-100 bg-white shadow-inner">
               {config.steps.map((step) => {
                 const isActive = params[config.key] === step.value;
                 return (
                   <button
+                    type="button"
                     key={step.value}
                     onClick={() => handleChange(config.key, step.value)}
-                    className={`py-2 text-[10px] font-black rounded-lg transition-all duration-300 ${
+                    className={`py-1.5 text-[9px] font-black rounded-lg transition-all duration-300 ${
                       isActive 
                         ? `bg-${activeColor} text-white shadow-md scale-[1.05]` 
                         : 'text-warm-gray hover:text-charcoal hover:bg-slate-50'
