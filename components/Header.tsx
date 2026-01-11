@@ -11,9 +11,11 @@ const Header: React.FC<HeaderProps> = ({ isFunMode, onToggleFunMode }) => {
     <header className={`${isFunMode ? 'bg-ollim-green' : 'bg-ollim-sand'} text-white py-2 px-6 shadow-md transition-colors duration-500`}>
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="bg-white/20 p-1.5 rounded-full backdrop-blur-sm border border-white/30 transition-transform hover:rotate-12">
-            <i className={`fas ${isFunMode ? 'fa-face-laugh-squint' : 'fa-feather-pointed'} text-lg`}></i>
-          </div>
+          <img
+            src="/images/ollim_logo.png"
+            alt="Ollim Logo"
+            className="h-10 w-auto object-contain hover:rotate-12 transition-transform duration-300"
+          />
           <div>
             <h1 className="text-lg font-bold tracking-tight font-serif-ollim">올림 (Ollim)</h1>
             <p className="text-white/80 text-[9px] font-medium tracking-wide uppercase">
@@ -23,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ isFunMode, onToggleFunMode }) => {
         </div>
 
         <div className="flex items-center">
-          <button 
+          <button
             type="button"
             onClick={onToggleFunMode}
             className={`group relative flex items-center h-7 px-1 rounded-full border border-white/30 bg-black/10 mode-toggle-pilled w-24 overflow-hidden`}
